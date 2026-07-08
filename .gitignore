@@ -157,3 +157,6 @@ Thumbs.db
 
 # VS Code
 .vscode/
+build/
+dist/
+
