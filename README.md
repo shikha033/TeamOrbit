@@ -4,7 +4,7 @@
 > **AI-Powered Collaboration Platform for Student Teams**
 
 
-🌐 Live Demo:
+🌐 Live Demo: [TeamOrbit](https://team-orbit.vercel.app)
 
 TeamOrbit is a full-stack collaboration platform built to simplify project management for college teams, hackathons, and academic collaborations. It combines task management, team communication, analytics, and AI-powered productivity tools into a single platform.
 
