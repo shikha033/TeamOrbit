@@ -10,14 +10,18 @@ const Settings = () => {
         <div className="text-[11px] uppercase tracking-[0.25em] text-slate-500 mb-2">Settings</div>
         <h2>Your <span className="serif-highlight text-gradient">preferences</span>.</h2>
       </div>
+{/*
+<div className="to-card p-6">
+  <div className="flex items-center gap-3 mb-3">
+    <Moon size={16} className="text-purple-300" />
+    <h3 className="text-base">Appearance</h3>
+  </div>
 
-      <div className="to-card p-6">
-        <div className="flex items-center gap-3 mb-3">
-          <Moon size={16} className="text-purple-300" />
-          <h3 className="text-base">Appearance</h3>
-        </div>
-        <p className="text-sm text-slate-500">TeamOrbit is dark-first by design. A light mode is on our roadmap.</p>
-      </div>
+  <p className="text-sm text-slate-500">
+    TeamOrbit is dark-first by design. A light mode is on our roadmap.
+  </p>
+</div>
+*/}
 
       <div className="to-card p-6">
         <div className="flex items-center gap-3 mb-3">
