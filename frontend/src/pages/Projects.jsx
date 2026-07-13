@@ -76,6 +76,17 @@ const Projects = () => {
 
   const submit = async (e) => {
     e.preventDefault();
+     
+  if (
+    !form.name.trim() ||
+    !form.description.trim() ||
+    !form.problemStatement.trim() ||
+    !form.techStack.trim() ||
+    !form.deadline
+  ) {
+    toast.error("Please fill in all required project details.");
+    return;
+  }
     setSaving(true);
     try {
       await api.post('/projects', {
@@ -133,15 +144,15 @@ const Projects = () => {
           </div>
           <div>
             <label className="label">Description</label>
-            <textarea className="textarea" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="A one-liner about your project" />
+            <textarea  required className="textarea" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="A one-liner about your project" />
           </div>
           <div>
             <label className="label">Problem statement</label>
-            <textarea className="textarea" value={form.problemStatement} onChange={(e) => setForm({ ...form, problemStatement: e.target.value })} placeholder="What problem are you solving?" />
+            <textarea  required className="textarea" value={form.problemStatement} onChange={(e) => setForm({ ...form, problemStatement: e.target.value })} placeholder="What problem are you solving?" />
           </div>
           <div>
             <label className="label">Tech stack (comma-separated)</label>
-            <input className="input" value={form.techStack} onChange={(e) => setForm({ ...form, techStack: e.target.value })} placeholder="React, Node.js, MongoDB" data-testid="project-tech" />
+            <input  required className="input" value={form.techStack} onChange={(e) => setForm({ ...form, techStack: e.target.value })} placeholder="React, Node.js, MongoDB" data-testid="project-tech" />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -155,7 +166,7 @@ const Projects = () => {
             </div>
             <div>
               <label className="label">Deadline</label>
-              <input type="date" className="input" value={form.deadline} onChange={(e) => setForm({ ...form, deadline: e.target.value })} />
+              <input  required type="date" className="input" value={form.deadline} onChange={(e) => setForm({ ...form, deadline: e.target.value })} />
             </div>
           </div>
           <label className="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
