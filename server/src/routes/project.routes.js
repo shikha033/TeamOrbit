@@ -24,7 +24,19 @@ router.post('/', auth, async (req, res, next) => {
   try {
     const { name, description, problemStatement, techStack, team, priority, deadline, hackathonMode, tags } =
       req.body;
-    if (!name) return res.status(400).json({ error: 'Project name is required' });
+   if (
+  !name?.trim() ||
+  !description?.trim() ||
+  !problemStatement?.trim() ||
+  !techStack ||
+  (Array.isArray(techStack) && techStack.length === 0) ||
+  !deadline
+  ) {
+  return res.status(400).json({
+    error:
+      'Project name, description, problem statement, tech stack, and deadline are required.',
+  });
+}
     const project = await Project.create({
       name,
       description,
