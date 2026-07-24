@@ -39,7 +39,7 @@ const Login = () => {
             </div>
             <span className="font-semibold text-lg">TeamOrbit</span>
           </Link>
-          <h2 className="mb-4">Where <span className="serif-highlight text-gradient">student teams</span> ship real projects.</h2>
+          <h2 className="mb-4">Where <span className="serif-highlight text-gradient">student teams</span> collaborate smarter</h2>
           <p className="text-slate-400 leading-relaxed">
             Fair contribution scores. AI task allocation. Auto-generated docs and slides. Log in
             and get back to what matters — building.
