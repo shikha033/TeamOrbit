@@ -1,11 +1,13 @@
 import React from 'react';
 import { X } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useQueryClient } from '@tanstack/react-query';
 import api from '@/lib/api';
 import { useAuth } from '@/lib/auth';
 
 const Profile = () => {
   const { user, updateUser } = useAuth();
+  const qc = useQueryClient();
   const [form, setForm] = React.useState({ name: user?.name || '', bio: user?.bio || '', college: user?.college || '', avatar: user?.avatar || '' });
   const [skills, setSkills] = React.useState(user?.skills || []);
   const [skillInput, setSkillInput] = React.useState('');
@@ -22,6 +24,10 @@ const Profile = () => {
     try {
       const { data } = await api.put('/users/me', { ...form, skills });
       updateUser(data.user);
+      // Your new name/avatar is populated live into chat messages, team member
+      // lists, task assignees, etc. — but those views may already be cached.
+      // Invalidate everything currently mounted so they refetch with the fresh data.
+      qc.invalidateQueries();
       toast.success('Profile updated');
     } catch { toast.error('Update failed'); } finally { setSaving(false); }
   };
