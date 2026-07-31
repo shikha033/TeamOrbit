@@ -6,6 +6,7 @@ import Landing from '@/pages/Landing';
 import Login from '@/pages/Login';
 import Signup from '@/pages/Signup';
 import ForgotPassword from '@/pages/ForgotPassword';
+import ResetPassword from '@/pages/ResetPassword';
 import JoinTeam from '@/pages/JoinTeam';
 import AppLayout from '@/components/AppLayout';
 import Dashboard from '@/pages/Dashboard';
@@ -38,6 +39,7 @@ const App = () => (
     <Route path="/auth/login" element={<Login />} />
     <Route path="/auth/signup" element={<Signup />} />
     <Route path="/auth/forgot" element={<ForgotPassword />} />
+    <Route path="/reset-password/:token" element={<ResetPassword />} />
     <Route path="/join/:code" element={<JoinTeam />} />
     <Route
       path="/app"

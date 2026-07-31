@@ -1,6 +1,7 @@
 const express = require('express');
 const Project = require('../models/Project');
 const Task = require('../models/Task');
+const Team = require('../models/Team');
 const auth = require('../middleware/auth');
 
 const router = express.Router();
@@ -37,13 +38,24 @@ router.post('/', auth, async (req, res, next) => {
       'Project name, description, problem statement, tech stack, and deadline are required.',
   });
 }
+    // If this project belongs to a team, everyone already on that team should
+    // have access to it from the start, not just whoever clicked "create".
+    let members = [req.user._id];
+    if (team) {
+      const t = await Team.findById(team).select('members');
+      if (t) {
+        const teamUserIds = t.members.map((m) => String(m.user));
+        members = [...new Set([...members.map(String), ...teamUserIds])];
+      }
+    }
+
     const project = await Project.create({
       name,
       description,
       problemStatement,
       techStack: techStack || [],
       owner: req.user._id,
-      members: [req.user._id],
+      members,
       team,
       priority: priority || 'medium',
       deadline,

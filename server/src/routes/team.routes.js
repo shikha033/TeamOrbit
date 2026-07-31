@@ -1,6 +1,7 @@
 const express = require('express');
 const crypto = require('crypto');
 const Team = require('../models/Team');
+const Project = require('../models/Project');
 const Notification = require('../models/Notification');
 const auth = require('../middleware/auth');
 
@@ -62,6 +63,14 @@ router.post('/join', auth, async (req, res, next) => {
     if (already) return res.status(400).json({ error: 'You are already a member of this team' });
     team.members.push({ user: req.user._id, role: 'member' });
     await team.save();
+
+    // Joining a team should grant access to that team's existing projects too —
+    // otherwise a new member can join fine but can't see/open any project under it.
+    await Project.updateMany(
+      { team: team._id, members: { $ne: req.user._id } },
+      { $push: { members: req.user._id } }
+    );
+
     await Notification.create({
       user: team.owner,
       type: 'member_joined',
